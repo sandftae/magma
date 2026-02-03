@@ -1,0 +1,5 @@
+# project root files and folder to be fully excluded
+.idea
+.env
+log/
+archive/
