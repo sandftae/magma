@@ -43,7 +43,7 @@ COPY ./source .
 # @description: copy dashboard app sources
 COPY --from=dashboard-builder /app/dist ./assets/env/app-board
 
-RUN chmod +x launcher
+RUN chmod +x ./bash/launcher
 RUN chmod +x ./bash/smoke/smoke
 
 CMD ["bash"]
