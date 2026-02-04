@@ -1,15 +1,16 @@
 source/** linguist-vendored=false
-source/** linguist-documentation=false
-source/** linguist-generated=false
 source/** linguist-detectable=true
 
-*.jsx linguist-language=JavaScript
-*.js linguist-language=JavaScript
-*.sh linguist-language=Shell
+source/bash/** linguist-language=Shell
+source/bash/**/* linguist-language=Shell
 
+source/app-board/src/**/*.jsx linguist-language=JavaScript
 source/app-board/src/** linguist-detectable=true
-source/app-board/src/** linguist-vendored=false
+
+Dockerfile linguist-language=Dockerfile
+Dockerfile linguist-detectable=true
 
 *.yml linguist-documentation=true
 *.json linguist-documentation=true
+*.css linguist-documentation=true
 package-lock.json linguist-generated=true
