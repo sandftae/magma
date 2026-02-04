@@ -1,9 +1,0 @@
-# ignore noe folder
-node_modules
-
-# ignore build folders
-dist
-build
-
-# ignore config folder
-config

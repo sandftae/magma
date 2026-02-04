@@ -34,7 +34,7 @@ jobs:
 
       - name: Run ESLint
         # check code style based on rules of the .eslintrc.json
-        run: npx eslint . --ext .js,.jsx
+        run: npx eslint .
 
       - name: Build Check
         # check the build
