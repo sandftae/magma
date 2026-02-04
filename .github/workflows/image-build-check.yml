@@ -15,6 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -23,4 +28,4 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: false # just build check, do not push anywhere
+          push: false # just build check, do not push
