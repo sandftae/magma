@@ -1,0 +1,12 @@
+# ignore everything in the context
+**
+
+# but not the Dockerfile
+!Dockerfile
+
+# and do not ignore the source folder and all its contents
+!source/
+!source/**
+
+# but ignore node_modules
+source/**/node_modules

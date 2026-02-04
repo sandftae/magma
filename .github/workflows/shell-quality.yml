@@ -1,0 +1,25 @@
+name: Shell Quality
+
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+  workflow_dispatch:
+
+jobs:
+  shellcheck:
+    name: Bash Linter (ShellCheck)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: "source/bash"
+          severity: style
+          check_all_files_with_shebangs: true
+        env:
+          SHELLCHECK_OPTS: "-s bash -e SC1091 -x"
