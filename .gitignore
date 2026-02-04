@@ -1,0 +1,18 @@
+# project root files and folder to be fully excluded
+.idea
+.env
+.DS_Store
+
+# temp folders
+log/
+archive/
+
+# ignore node fodlers
+**/node_modules/
+
+# ignore build fodlers
+source/app-board/dist/
+source/app-board/build/
+
+# ignore linter cache files
+.eslintcache
