@@ -1,15 +1,34 @@
+# source is not vendor
 source/** linguist-vendored=false
-source/** linguist-documentation=false
-source/** linguist-generated=false
 source/** linguist-detectable=true
+source/** linguist-programming=true
 
-*.jsx linguist-language=JavaScript
-*.js linguist-language=JavaScript
-*.sh linguist-language=Shell
-
-source/app-board/src/** linguist-detectable=true
+# sub-folder 'src' is not vendor
 source/app-board/src/** linguist-vendored=false
+source/app-board/src/** linguist-detectable=true
+source/app-board/src/** linguist-programming=true
 
+# detect js/jsx files
+source/app-board/src/**/*.js linguist-language=JavaScript
+source/app-board/src/**/*.jsx linguist-language=JavaScript
+
+# detect bash scripts
+source/bash/** linguist-vendored=false
+source/bash/** linguist-detectable=true
+source/bash/** linguist-programming=true
+source/bash/** linguist-language=Shell
+
+# detect Dockerfile
+Dockerfile linguist-language=Dockerfile
+Dockerfile linguist-detectable=true
+
+# hide noise from the language bar
 *.yml linguist-documentation=true
+*.yaml linguist-documentation=true
+
 *.json linguist-documentation=true
+
+*.css linguist-documentation=true
+*.scss linguist-documentation=true
+
 package-lock.json linguist-generated=true
