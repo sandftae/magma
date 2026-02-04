@@ -1,14 +1,12 @@
 # STAGE #1: the dashboard build
 FROM node:18-alpine AS dashboard-builder
 
-# @description: set workdir
 WORKDIR /app
 
-# @description: copy packages
 COPY ./source/app-board/package*.json ./
 
-# @description: install project
-RUN npm install
+# Hadolint rule: Use 'npm ci' for automated builds to ensure clean install from lockfile
+RUN npm ci
 
 # @description: copy react-app itself
 COPY ./source/app-board/ ./
@@ -21,11 +19,9 @@ FROM alpine:3.18
 
 WORKDIR /var/www/src
 
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
-
-# @description: this is for bash dialog only, and it is just reduce time delay once the customer press ESC || CTRL + C
-ENV ESCDELAY=0
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    ESCDELAY=0
 
 # @description: run upgrade and install bash and ncurses (for tput)
 RUN apk update && apk upgrade && \
@@ -43,7 +39,7 @@ COPY ./source .
 # @description: copy dashboard app sources
 COPY --from=dashboard-builder /app/dist ./assets/env/app-board
 
-RUN chmod +x ./bash/launcher
-RUN chmod +x ./bash/smoke/smoke
+# consolidating chmod commands into one RUN instruction
+RUN chmod +x ./bash/launcher ./bash/smoke/smoke
 
 CMD ["bash"]
