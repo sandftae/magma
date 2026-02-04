@@ -36,6 +36,7 @@ export default [
             ...react.configs.recommended.rules,
             ...react.configs["jsx-runtime"].rules,
             ...reactHooks.configs.recommended.rules,
+            "react/no-unescaped-entities": "off",
             "react/prop-types": "off",
             "no-unused-vars": "warn",
         },

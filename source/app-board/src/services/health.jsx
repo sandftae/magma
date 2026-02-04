@@ -26,7 +26,7 @@ export const pingService = async (url) => {
 
         clearTimeout(timeoutId);
         return true;
-    } catch (error) {
+    } catch {
         return false;
     }
 };
