@@ -7,3 +7,4 @@ rules:
     level: warning # if more it is must be warning, not error
   document-start: disable # do not judge me, linter, if there is no ---
   truthy: disable
+  new-line-at-end-of-file: disable
