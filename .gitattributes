@@ -1,26 +1,15 @@
-# mark everything in source as programming code
 source/** linguist-vendored=false
+source/** linguist-documentation=false
+source/** linguist-generated=false
 source/** linguist-detectable=true
-source/** linguist-programming=true
 
-# specific folder overrides for React and Bash
-source/bash/** linguist-detectable=true
-source/app-board/** linguist-detectable=true
+*.jsx linguist-language=JavaScript
+*.js linguist-language=JavaScript
+*.sh linguist-language=Shell
 
-# ensure specific file types are detectable
-*.sh linguist-detectable=true
-*.jsx linguist-detectable=true
-*.js linguist-detectable=true
-*.ts linguist-detectable=true
+source/app-board/src/** linguist-detectable=true
+source/app-board/src/** linguist-vendored=false
 
-# include Dockerfile in language statistics
-Dockerfile linguist-detectable=true
-Dockerfile linguist-language=Dockerfile
-
-# hide configuration, styles, and lock files
 *.yml linguist-documentation=true
-*.yaml linguist-documentation=true
 *.json linguist-documentation=true
-*.css linguist-documentation=true
-*.scss linguist-documentation=true
 package-lock.json linguist-generated=true
