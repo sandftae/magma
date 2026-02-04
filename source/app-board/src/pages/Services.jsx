@@ -1,5 +1,3 @@
-// force rebuild
-
 import {useState, useEffect} from 'react';
 import {SERVICES_DATA} from '../data/data';
 import {pingService} from '../services/health';
