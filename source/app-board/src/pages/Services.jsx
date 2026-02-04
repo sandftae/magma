@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {SERVICES_DATA} from '../data/data';
 import {pingService} from '../services/health';
 import ServiceGroup from '../components/ServiceGroup';
