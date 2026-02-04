@@ -1,9 +1,11 @@
-# uncheck flag for 'vendor' folders to ensure everything is 'source
+# mark everything in source as programming code
 source/** linguist-vendored=false
+source/** linguist-detectable=true
+source/** linguist-programming=true
 
-# force to treat subfolders as code folders
-source/bash/* linguist-detectable=true
-source/app-board/src/**/* linguist-detectable=true
+# specific folder overrides for React and Bash
+source/bash/** linguist-detectable=true
+source/app-board/** linguist-detectable=true
 
 # ensure specific file types are detectable
 *.sh linguist-detectable=true
@@ -13,14 +15,12 @@ source/app-board/src/**/* linguist-detectable=true
 
 # include Dockerfile in language statistics
 Dockerfile linguist-detectable=true
-Dockerfile linguist-language=Dockerfast
+Dockerfile linguist-language=Dockerfile
 
-# treat configuration and style files as documentation
+# hide configuration, styles, and lock files
 *.yml linguist-documentation=true
 *.yaml linguist-documentation=true
 *.json linguist-documentation=true
 *.css linguist-documentation=true
 *.scss linguist-documentation=true
-
-# ignore lock files completely
 package-lock.json linguist-generated=true
