@@ -1,0 +1,42 @@
+/**
+ * Global stylesheet for the devstack dashboard.
+ * Defines base Tailwind layers and custom utility components.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /**
+     * Navigation link base styling.
+     * Applied to header menu items with hover effects and transitions.
+     */
+    .nav-link {
+        @apply block p-[14px_13px] font-bold hover:bg-[#c9e0ff] transition-colors text-[#222];
+    }
+
+    /**
+     * Active state modifier for navigation links.
+     * Uses the primary color theme to indicate the current route.
+     */
+    .nav-link-active {
+        @apply text-primary;
+    }
+
+    /**
+     * Standard table header cell.
+     * Features primary branding colors and a solid bottom border.
+     */
+    .table-th {
+        @apply text-left p-3 text-primary font-bold border-b-2 border-primary bg-[#dcebff];
+    }
+
+    /**
+     * Standard table body cell.
+     * Includes subtle borders and smooth color transitions for hover states.
+     */
+    .table-td {
+        @apply p-3 border-b border-[#00649422] transition-colors;
+    }
+}
