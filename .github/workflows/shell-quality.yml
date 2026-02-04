@@ -20,5 +20,6 @@ jobs:
         with:
           scandir: "source/bash"
           severity: style
+          check_all_files_with_shebangs: true
         env:
           SHELLCHECK_OPTS: "-s bash -e SC1091 -x"

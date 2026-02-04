@@ -44,6 +44,6 @@ COPY ./source .
 COPY --from=dashboard-builder /app/dist ./assets/env/app-board
 
 RUN chmod +x launcher
-RUN chmod +x ./scripts/smoke/smoke
+RUN chmod +x ./bash/smoke/smoke
 
 CMD ["bash"]
