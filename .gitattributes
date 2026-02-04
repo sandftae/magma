@@ -10,7 +10,7 @@ source/app-board/src/** linguist-programming=true
 
 # detect js/jsx files
 source/app-board/src/**/*.js linguist-language=JavaScript
-source/app-board/src/**/*.jsx linguist-language=JavaScript
+source/app-board/src/**/*.jsx linguist-language=JSX
 
 # detect bash scripts
 source/bash/** linguist-vendored=false
