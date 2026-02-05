@@ -37,9 +37,7 @@ uiSelectMode() {
         --item.padding "0 0 0 0" \
         --selected.margin "0 0 0 3" \
         --cursor.padding="0 3 0 0" \
-        --cursor="     >" \
-        --selected-prefix="• " \
-        --unselected-prefix="  " \
+        --cursor="   >" \
         --selected.foreground="$COLOR_ACCENT" \
         "$LABEL_MODERN" "$LABEL_CLASSIC")
 
