@@ -30,5 +30,7 @@ kernelRunLoop() {
         esac
     done
 
+    setAppConfig "current_step_index" "$currentIndex"
+
     return 0
 }
