@@ -9,9 +9,6 @@ appBootstrap() {
     local projectRoot
     projectRoot=$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)
 
-    # clear terminal before starting the application
-    clear
-
     # define top-level directories to load recursively
     local components=(
         "app/utils"

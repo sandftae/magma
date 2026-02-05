@@ -4,6 +4,8 @@
 # DESCRIPTION: application entrypoint (minimal logic)
 # ============================================================
 
+# trap ctrl + c / esc events
+trap processTerminated SIGINT SIGTERM
 
 # shellcheck source=/dev/null
 source "./app/core/bootstrap.sh"
