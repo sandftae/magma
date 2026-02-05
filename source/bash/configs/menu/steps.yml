@@ -10,7 +10,7 @@ steps:
     step: version
     description: "Select the Commerce Version to work with."
 
-  - id: frontend
+  - id: platform_frontend
     step: frontend
     description: "Select the Commerce Frontend to work with."
 
