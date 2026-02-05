@@ -11,26 +11,33 @@ uiSelectMode() {
     # clear just a little bit
     clear
 
-    # check if gum is installed
-    command -v gum >/dev/null 2>&1 || {
-        setAppConfig "uiMode" "dialog"
-        return 0
-    }
+    # hero section
+    gum style \
+        --foreground "$COLOR_PRIMARY" \
+        --border double \
+        --border-foreground "$COLOR_ACCENT" \
+        --align center \
+        --width 82 \
+        --margin "1 2" \
+        --padding "0 1" \
+        "$APP_LOGO"
 
-    # using gum for the initial choice
-    choice=$(gum choose --header "Select Interface Mode" "Gum CLI" "Bash Dialog")
+    # just visual effects, nothing more
+    gum spin --spinner "$UI_SPINNER_TYPE" --title " Preparing setup modules..." -- sleep 0.6
+
+    # interaction
+    choice=$(gum choose --header "Select your configuration style:" "$LABEL_MODERN" "$LABEL_CLASSIC")
     local exitCode=$?
 
-    # handle esc or ctrl+c (gum returns 130 for sigint)
-    [[ $exitCode -eq 130 ]] && {
+    [[ $exitCode -eq 130 || -z "$choice" ]] && {
         processTerminated
         return 1
     }
 
+    # routing
     case "$choice" in
-        "Gum CLI")      setAppConfig "uiMode" "gum" ;;
-        "Bash Dialog")  setAppConfig "uiMode" "dialog" ;;
-        "")             processTerminated; return 1 ;;
+        "$LABEL_MODERN")  setAppConfig "uiMode" "gum" ;;
+        "$LABEL_CLASSIC") setAppConfig "uiMode" "dialog" ;;
     esac
 
     return 0
