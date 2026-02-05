@@ -20,7 +20,10 @@ appRun() {
         uiSelectMode || break
 
         # start the main execution loop
-        kernelRunLoop
+        if ! kernelRunLoop; then
+            logError "Kernel loop crashed. Exiting to prevent UI loop."
+            exit 1
+        fi
 
         totalSteps=${#__APP_STEPS[@]}
         lastIndex=$(getAppConfig "current_step_index")

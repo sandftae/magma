@@ -9,13 +9,9 @@ appBootstrap() {
     local projectRoot
     projectRoot=$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)
 
-    # define top-level directories to load recursively
-    local components=(
-        "app/utils"
-        "app/ui"
-        "app/core"
-        "app/steps"
-    )
+    # define top-level directories and files to source
+    local components=("app/utils" "app/ui" "app/core" "app/steps")
+    local config_paths=("$projectRoot/app/core/config/envs" "$projectRoot/app/steps/config/envs/general")
 
     # execute recursive loading of all shell components
     local folder
@@ -30,7 +26,7 @@ appBootstrap() {
     setAppConfig "projectRoot" "$projectRoot"
     setAppConfig "stepsYamlPath" "$projectRoot/configs/menu/steps.yml"
 
-    kernelLoadGeneralConfigs
+    utilsLoadEnvFiles "${config_paths[@]}"
 }
 
 # recursively finds and sources all shell scripts in a directory tree
