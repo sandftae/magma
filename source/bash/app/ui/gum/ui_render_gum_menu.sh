@@ -4,22 +4,52 @@
 # DESCRIPTION: concrete implementation of menu using gum
 # ============================================================
 
-# function uiRenderGumMenu
+# uiRenderGumMenu provides a professional menu with a non-selectable separator
 uiRenderGumMenu() {
-    local title="$1"
+    local raw_title="$1"
     shift
+    local title
+    local choice=""
     local options=("$@")
-    local choice
+    local separator="
+    "
 
-    # render gum choose
-    choice=$(gum choose --header "$title" "${options[@]}" "< BACK")
-    local exitCode=$?
+    title=$(formatToTitleCase "$raw_title")
 
-    # handle esc / ctrl+c (return 255 if exit code is 130 or choice is empty)
-    [[ $exitCode -eq 130 || -z "$choice" ]] && return 255
+    # combine options with a visual separator and back button
+    local menu_items=("${options[@]}" "$separator" "< BACK")
 
-    # handle navigation back
-    [[ "$choice" == "< BACK" ]] && return 1
+    uiRenderExitHint
+
+    # loop until a valid selection is made (skips the separator)
+    while true; do
+        choice=$(
+            gum choose \
+                --header "$title" \
+                --header.margin "0 0 0 3" \
+                --item.margin "0 0 0 3" \
+                --item.padding "0 0 0 0" \
+                --selected.margin "0 0 0 3" \
+                --cursor.padding="0 3 0 0" \
+                --cursor="   >" \
+                --selected.foreground="$COLOR_ACCENT" \
+                "${menu_items[@]}"
+        )
+
+        local exitCode=$?
+
+        # handle esc / ctrl+c
+        [[ $exitCode -eq 130 || -z "$choice" ]] && return 255
+
+        # handle navigation back
+        [[ "$choice" == "< BACK" ]] && return 1
+
+        # if user selected the separator, just continue the loop
+        [[ "$choice" == "$separator" ]] && continue
+
+        # valid choice made
+        break
+    done
 
     # return choice to stdout
     printf '%s' "$choice"

@@ -29,6 +29,8 @@ uiSelectMode() {
         --title " Preparing builder ..." \
         -- sleep 0.7
 
+    uiRenderExitHint
+
     # interaction with proper indentation
     choice=$(gum choose \
         --header "$header_text" \
@@ -37,9 +39,7 @@ uiSelectMode() {
         --item.padding "0 0 0 0" \
         --selected.margin "0 0 0 3" \
         --cursor.padding="0 3 0 0" \
-        --cursor="     >" \
-        --selected-prefix="• " \
-        --unselected-prefix="  " \
+        --cursor="   >" \
         --selected.foreground="$COLOR_ACCENT" \
         "$LABEL_MODERN" "$LABEL_CLASSIC")
 
