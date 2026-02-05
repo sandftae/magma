@@ -1,3 +1,12 @@
 #!/bin/bash
+# ============================================================
+# NAMESPACE: Launcher
+# DESCRIPTION: application entrypoint (minimal logic)
+# ============================================================
 
-# DO nothing for now
+
+# shellcheck source=/dev/null
+source "./app/core/bootstrap.sh"
+
+# run bootstrap and start the application
+appBootstrap && appRun
