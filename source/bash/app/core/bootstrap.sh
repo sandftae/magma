@@ -29,6 +29,8 @@ appBootstrap() {
     # set initial config now that state functions are available
     setAppConfig "projectRoot" "$projectRoot"
     setAppConfig "stepsYamlPath" "$projectRoot/configs/menu/steps.yml"
+
+    kernelLoadGeneralConfigs
 }
 
 # recursively finds and sources all shell scripts in a directory tree
