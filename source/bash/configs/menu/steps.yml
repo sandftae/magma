@@ -1,0 +1,35 @@
+version: 2
+metadata: "This file describes the steps as well as the order for each step."
+
+steps:
+  - id: platform_edition
+    step: edition
+    description: "Select the Commerce Edition to work with."
+
+  - id: platform_version
+    step: version
+    description: "Select the Commerce Version to work with."
+
+  - id: frontend
+    step: frontend
+    description: "Select the Commerce Frontend to work with."
+
+  - id: domain
+    step: domain
+    description: "Configure domain."
+
+  - id: base_stack_overview
+    step: base_stack_overview
+    description: "Show basic stack setup."
+
+  - id: services_prompt
+    step: services_prompt
+    description: "Request to setup services."
+
+  - id: services
+    step: services
+    description: "Show services to setup."
+
+  - id: final_stack_overview
+    step: final_stack_overview
+    description: "Show services to setup."
