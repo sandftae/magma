@@ -8,6 +8,9 @@
 uiSelectMode() {
     local choice
 
+    # clear just a little bit
+    clear
+
     # check if gum is installed
     command -v gum >/dev/null 2>&1 || {
         setAppConfig "uiMode" "dialog"
