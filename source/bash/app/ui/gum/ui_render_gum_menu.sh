@@ -19,6 +19,8 @@ uiRenderGumMenu() {
     # combine options with a visual separator and back button
     local menu_items=("${options[@]}" "$separator" "< BACK")
 
+    uiRenderExitHint
+
     # loop until a valid selection is made (skips the separator)
     while true; do
         choice=$(

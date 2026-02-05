@@ -29,6 +29,8 @@ uiSelectMode() {
         --title " Preparing builder ..." \
         -- sleep 0.7
 
+    uiRenderExitHint
+
     # interaction with proper indentation
     choice=$(gum choose \
         --header "$header_text" \
