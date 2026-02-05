@@ -31,7 +31,8 @@ RUN apk update && apk upgrade && \
         ncurses \
         ncurses-terminfo \
         dialog \
-        yq;
+        yq \
+        gum;
 
 # @description: copy magma source
 COPY ./source .
