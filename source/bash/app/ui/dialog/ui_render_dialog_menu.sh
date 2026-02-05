@@ -7,15 +7,29 @@
 # uiRenderDialogMenu
 uiRenderDialogMenu() {
     local title="$1"
-    shift
+    local raw_prefix="$2"
+    shift 2
     local choice
     local options=("$@")
     local menu_height="${UI_MENU_HEIGHT:-5}"
     local cancel_label="${UI_CANCEL_LABEL:-"Exit"}"
-    local backtitle="${EDITION_BACKTITLE:-$UI_BACKTITLE}"
-    local width="${EDITION_DIALOG_WIDTH:-$UI_DIALOG_WIDTH}"
-    local height="${EDITION_DIALOG_HEIGHT:-$UI_DIALOG_HEIGHT}"
-    local tooltip="${EDITION_TOOLTIP:-$UI_UP_AND_DOWN_TOOLTIP}"
+
+    local config_prefix="${raw_prefix^^}"
+
+    local backtitle_var="${config_prefix}_BACKTITLE"
+    local width_var="${config_prefix}_DIALOG_WIDTH"
+    local height_var="${config_prefix}_DIALOG_HEIGHT"
+    local tooltip_var="${config_prefix}_DIALOG_TOOLTIP"
+    local menu_height="${config_prefix}_DIALOG_MENU_HEIGHT"
+    local cancel_label="${config_prefix}_DIALOG_CANCEL_LABEL"
+
+    local backtitle="${!backtitle_var:-$UI_BACKTITLE}"
+    local width="${!width_var:-$UI_DIALOG_WIDTH}"
+    local height="${!height_var:-$UI_DIALOG_HEIGHT}"
+    local tooltip="${!tooltip_var:-$UI_UP_AND_DOWN_TOOLTIP}"
+    local menu_height="${!height_var:-$UI_DIALOG_MENU_HEIGHT}"
+    local cancel_label="${!cancel_label:-$UI_CANCEL_LABEL}"
+
 
     # format options for dialog
     local dialogOptions=()
