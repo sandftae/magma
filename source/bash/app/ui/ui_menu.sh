@@ -14,7 +14,7 @@ uiMenu() {
 
     # routing based on application configuration
     case "$mode" in
-        "gum") uiRenderGumMenu "$title" "${options[@]}" ;;
-        "dialog") uiRenderDialogMenu "$title" "${options[@]}" ;;
+        "gum") uiRenderGumMenu "$title" "${options[@]}" ; return $? ;;
+        "dialog") uiRenderDialogMenu "$title" "${options[@]}" ; return $? ;;
     esac
 }

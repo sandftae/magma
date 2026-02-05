@@ -15,8 +15,8 @@ uiRenderGumMenu() {
     choice=$(gum choose --header "$title" "${options[@]}" "< BACK")
     local exitCode=$?
 
-    # handle esc / ctrl+c
-    [[ $exitCode -eq 130 ]] && return 255
+    # handle esc / ctrl+c (return 255 if exit code is 130 or choice is empty)
+    [[ $exitCode -eq 130 || -z "$choice" ]] && return 255
 
     # handle navigation back
     [[ "$choice" == "< BACK" ]] && return 1
