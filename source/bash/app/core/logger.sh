@@ -12,7 +12,7 @@ logWrite() {
     local level="$1"
     local message="$2"
     local logFile
-    logFile="app.log" # should be moved to config later
+    logFile="app.log"
 
     # write to file with timestamp
     echo "$(date '+%Y-%m-%d %H:%M:%S') [$level] $message" >> "$logFile"
