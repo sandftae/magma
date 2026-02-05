@@ -13,7 +13,7 @@ kernelLoadStepConfig() {
     projectRoot=$(getAppConfig "projectRoot")
 
     # build path to config file (filenames are lowercase)
-    local configFile="$projectRoot/app/steps/config/envs/.${stepId}.env"
+    local configFile="$projectRoot/app/steps/config/envs/steps/.${stepId}.env"
 
     # source file if it exists
     if [[ -f "$configFile" ]]; then
