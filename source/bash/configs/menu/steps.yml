@@ -2,11 +2,6 @@ version: 2
 metadata: "This file describes the steps as well as the order for each step."
 
 steps:
-  - id: domain
-    step: domain
-    description: "Configure domain."
-
-
   - id: platform_edition
     step: edition
     description: "Select the Commerce Edition to work with."
