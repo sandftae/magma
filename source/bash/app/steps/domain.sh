@@ -27,13 +27,20 @@ domain() {
 # __validateDomain performs domain validation
 __validateDomain() {
     local input="$1"
-    # set default if empty for validation purposes
     local check="${input:-$DOMAIN_DEFAULT}"
 
+    # basic format checks
     [[ "$check" =~ [[:space:]] ]] && printf "No spaces allowed" && return 1
     [[ "$check" == http* ]] && printf "No protocol allowed" && return 1
     [[ "$check" == https* ]] && printf "No protocol allowed" && return 1
     [[ "$check" == www.* ]] && printf "No 'www.' allowed" && return 1
+
+    # only alphanumeric, dots, and hyphens allowed
+    [[ ! "$check" =~ ^[a-zA-Z0-9.-]+$ ]] && printf "Only alphanumeric characters allowed" && return 1
+    [[ ! "$check" =~ ^[a-zA-Z0-9] ]] && printf "Must start with a letter or number" && return 1
+    [[ ! "$check" =~ [a-zA-Z0-9]$ ]] && printf "Must end with a letter or number" && return 1
+
+    # suffix validation
     [[ ! "$check" == *.localhost ]] && printf "Must end with .localhost" && return 1
 
     return 0
