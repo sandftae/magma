@@ -7,7 +7,6 @@
 # version handles the platform version selection process
 version() {
     # get title
-    local title="${VERSION_MENU_TITLE:-SELECT VERSION}"
     local displayNames=()
     local technicalValues=()
 
@@ -16,7 +15,7 @@ version() {
 
     # display menu and handle navigation (Back/Exit)
     local choice
-    choice=$(uiMenu "$title" "version" "${displayNames[@]}")
+    choice=$(uiMenu "version" "${displayNames[@]}")
     local exitCode=$?
 
     # handle navigation codes from uiMenu

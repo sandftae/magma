@@ -6,8 +6,6 @@
 
 # frontend handles the storefront selection process
 frontend() {
-    # title from configuration
-    local title="${PLATFORM_FRONTEND_MENU_TITLE:-Select Storefront}"
     local technicalValues=()
     local displayNames=()
     local choice
@@ -16,7 +14,7 @@ frontend() {
     parseKvOptions "$PLATFORM_FRONTEND_RAW_OPTIONS" displayNames technicalValues
 
     # render the menu
-    choice=$(uiMenu "$title" "platform_frontend" "${displayNames[@]}")
+    choice=$(uiMenu "platform_frontend" "${displayNames[@]}")
     local exitCode=$?
 
     # handle navigation based on exit codes

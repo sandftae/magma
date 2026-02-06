@@ -6,18 +6,20 @@
 
 # uiRenderGumMenu provides a professional menu with a non-selectable separator
 uiRenderGumMenu() {
-    local raw_title="$1"
+    local raw_prefix="$1"
     shift
     local title
     local choice=""
     local options=("$@")
     local separator="
     "
-
-    title=$(formatToTitleCase "$raw_title")
+    local config_prefix="${raw_prefix^^}"
 
     # combine options with a visual separator and back button
     local menu_items=("${options[@]}" "$separator" "< BACK")
+    local menu_title_var="${config_prefix}_MENU_TITLE"
+    local menu_title="${!menu_title_var:-$UI_CONFIGURATION_LABEL}"
+    title=$(formatToTitleCase "$menu_title")
 
     uiRenderExitHint
 
