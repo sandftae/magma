@@ -56,6 +56,7 @@ uiRenderGumInput() {
 
     # success
     printf '%s' "$user_input"
+    return 0
 }
 
 # __renderHeader draws the application hero section and current step title

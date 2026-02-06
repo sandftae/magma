@@ -6,9 +6,8 @@
 
 # uiRenderDialogMenu
 uiRenderDialogMenu() {
-    local title="$1"
-    local raw_prefix="$2"
-    shift 2
+    local raw_prefix="$1"
+    shift
     local choice
     local options=("$@")
     local menu_height="${UI_MENU_HEIGHT:-5}"
@@ -22,6 +21,7 @@ uiRenderDialogMenu() {
     local tooltip_var="${config_prefix}_DIALOG_TOOLTIP"
     local menu_height="${config_prefix}_DIALOG_MENU_HEIGHT"
     local cancel_label="${config_prefix}_DIALOG_CANCEL_LABEL"
+    local menu_title_var="${config_prefix}_MENU_TITLE"
 
     local backtitle="${!backtitle_var:-$UI_BACKTITLE}"
     local width="${!width_var:-$UI_DIALOG_WIDTH}"
@@ -29,7 +29,7 @@ uiRenderDialogMenu() {
     local tooltip="${!tooltip_var:-$UI_UP_AND_DOWN_TOOLTIP}"
     local menu_height="${!height_var:-$UI_DIALOG_MENU_HEIGHT}"
     local cancel_label="${!cancel_label:-$UI_CANCEL_LABEL}"
-
+    local menu_title="${!menu_title_var:-$UI_CONFIGURATION_LABEL}"
 
     # format options for dialog
     local dialogOptions=()
@@ -45,7 +45,7 @@ uiRenderDialogMenu() {
               --colors \
               --no-collapse \
               --backtitle "$backtitle" \
-              --title "$title" \
+              --title "$menu_title" \
               --cancel-label "$cancel_label" \
               --menu "$tooltip" "$height" "$width" "$menu_height" \
               "${dialogOptions[@]}" 3>&1 1>&2 2>&3)
