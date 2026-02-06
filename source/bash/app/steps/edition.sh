@@ -6,7 +6,6 @@
 
 # handles the platform edition selection process
 edition() {
-    local title="${EDITION_TITLE:-Select Edition}"
     local displayNames=()
     local technicalValues=()
 
@@ -15,7 +14,7 @@ edition() {
 
     # display menu and handle user navigation
     local choice
-    choice=$(uiMenu "$title" "edition" "${displayNames[@]}") || return $?
+    choice=$(uiMenu "edition" "${displayNames[@]}") || return $?
 
     # find technical value matching the selected display label
     local finalValue=""

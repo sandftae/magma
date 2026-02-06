@@ -6,16 +6,15 @@
 
 # function uiMenu
 uiMenu() {
-    local title="$1"
-    local config_prefix="$2"
-    shift 2
+    local config_prefix="$1"
+    shift
     local options=("$@")
     local mode
     mode=$(getAppConfig "uiMode")
 
     # routing based on application configuration
     case "$mode" in
-        "gum") uiRenderGumMenu "$title" "${options[@]}" ; return $? ;;
-        "dialog") uiRenderDialogMenu "$title" "$config_prefix" "${options[@]}" ; return $? ;;
+        "gum") uiRenderGumMenu "$config_prefix" "${options[@]}" ; return $? ;;
+        "dialog") uiRenderDialogMenu  "$config_prefix" "${options[@]}" ; return $? ;;
     esac
 }
