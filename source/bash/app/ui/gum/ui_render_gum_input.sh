@@ -7,17 +7,22 @@
 
 # uiRenderGumInput handles the UI lifecycle for a single text input field
 uiRenderGumInput() {
-    local title_raw="$1"
-    local value="$2"
-    local validator="$3"
-    local error_msg="$4"
-    local title
+    local value="$3"
     local user_input
     local exit_status
     local current_error
+    local validator="$2"
+    local error_msg="$4"
+    local raw_prefix="$1"
 
-    # format title
-    title=$(formatToTitleCase "$title_raw")
+    local config_prefix="${raw_prefix^^}"
+    local title_var="${config_prefix}_MENU_TITLE"
+    local default_var="${config_prefix}_DEFAULT_VALUE"
+
+    local title="${!title_var:-$UI_CONFIGURATION_LABEL}"
+    local default_val="${!default_var:-$UI_DEFAULT_VALUE}"
+
+    local current_val="${value:-$default_val}"
 
     # render UI block directly to stderr to bypass command substitution capture
     {
@@ -31,23 +36,23 @@ uiRenderGumInput() {
         printf "\n"
     } >&2
 
-    # get user data
-    user_input=$(gum input --prompt "   > " --value "$value" --width 60)
+    # get input
+    user_input=$(gum input --prompt "   > " --value "$current_val" --width 60)
     exit_status=$?
 
     # handle ESC / Ctrl+C
     [[ $exit_status -eq 130 ]] && return 255
 
     # validation
-    if [[ -n "$validator" ]]; then
+    [[ -n "$validator" ]] && {
         current_error=$("$validator" "$user_input")
         # validator returns text ? --> recurse with the new error message
         # do not judge me, I just learning bash
         [[ -n "$current_error" ]] && {
-            uiRenderGumInput "$title_raw" "$user_input" "$validator" "$current_error"
+            uiRenderGumInput "$raw_prefix" "$validator" "$user_input" "$current_error"
             return $?
         }
-    fi
+    }
 
     # success
     printf '%s' "$user_input"

@@ -6,11 +6,10 @@
 
 # domain handles the user input for the local development domain
 domain() {
-    local title
     local result
-    local title="${DOMAIN_MENU_TITLE:-Project Domain}"
+    local step_prefix="domain"
 
-    result=$(uiInput "$title" "$DOMAIN_DEFAULT" "__validateDomain")
+    result=$(uiInput "$step_prefix" "__validateDomain")
     local exitCode=$?
 
     # handle Escape/Cancel
@@ -19,7 +18,7 @@ domain() {
     [[ $exitCode -eq 1 ]] && return 1
 
     # save to stack
-    setStackData "project_domain" "${result:-$DOMAIN_DEFAULT}"
+    setStackData "domain" "${result:-$DOMAIN_DEFAULT}"
 
     return 0
 }
@@ -31,8 +30,8 @@ __validateDomain() {
 
     # basic format checks
     [[ "$check" =~ [[:space:]] ]] && printf "No spaces allowed" && return 1
-    [[ "$check" == http* ]] && printf "No protocol allowed" && return 1
-    [[ "$check" == https* ]] && printf "No protocol allowed" && return 1
+    [[ "$check" == http* ]] && printf "No 'http' protocol allowed" && return 1
+    [[ "$check" == https* ]] && printf "No 'https' protocol allowed" && return 1
     [[ "$check" == www.* ]] && printf "No 'www.' allowed" && return 1
 
     # only alphanumeric, dots, and hyphens allowed
@@ -41,7 +40,7 @@ __validateDomain() {
     [[ ! "$check" =~ [a-zA-Z0-9]$ ]] && printf "Must end with a letter or number" && return 1
 
     # suffix validation
-    [[ ! "$check" == *.localhost ]] && printf "Must end with .localhost" && return 1
+    [[ ! "$check" == *.localhost ]] && printf "Must end with '.localhost'" && return 1
 
     return 0
 }

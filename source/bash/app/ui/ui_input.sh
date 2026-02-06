@@ -6,14 +6,16 @@
 
 # function uiInput
 uiInput() {
-    local title="$1"
-    local defaultValue="$2"
-    local validatorFunc="$3"
+    local validator_func="$2"
+    local step_prefix="$1"
     local mode
+
+    # extract session mode
     mode=$(getAppConfig "uiMode")
 
+    # route the args by mode
     case "$mode" in
-        "gum")    uiRenderGumInput "$title" "$defaultValue" "$validatorFunc" ;;
-        "dialog") uiRenderDialogInput "$title" "$defaultValue" "$validatorFunc" ;;
+        "gum")    uiRenderGumInput "$step_prefix" "$validator_func" ;;
+        "dialog") uiRenderDialogInput "$step_prefix" "$validator_func" ;;
     esac
 }
