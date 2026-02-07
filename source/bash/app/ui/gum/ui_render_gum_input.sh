@@ -7,6 +7,7 @@
 
 # uiRenderGumInput handles the UI lifecycle for a single text input field
 uiRenderGumInput() {
+    local title
     local value="$3"
     local user_input
     local exit_status
@@ -18,14 +19,12 @@ uiRenderGumInput() {
     local config_prefix="${raw_prefix^^}"
     local title_var="${config_prefix}_MENU_TITLE"
     local default_var="${config_prefix}_DEFAULT_VALUE"
-
-    local title="${!title_var:-$UI_CONFIGURATION_LABEL}"
     local default_val="${!default_var:-$UI_DEFAULT_VALUE}"
-
     local current_val="${value:-$default_val}"
 
     # render UI block directly to stderr to bypass command substitution capture
     {
+        title=$(formatToTitleCase "${!title_var:-$UI_CONFIGURATION_LABEL}")
         __renderHeader "$title"
 
         # If error_msg exists, render error; otherwise, render tip
