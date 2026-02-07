@@ -8,15 +8,18 @@
 # uiRenderGumInput handles the UI lifecycle for a single text input field
 uiRenderGumInput() {
     local title
-    local value="$3"
+    local value="$2"
     local user_input
     local exit_status
     local current_error
-    local validator="$2"
-    local error_msg="$4"
-    local raw_prefix="$1"
+    local validator="$1"
+    local error_msg="$3"
+    local raw_prefix=""
+    local config_prefix=""
 
-    local config_prefix="${raw_prefix^^}"
+    raw_prefix=$(getAppConfig "step")
+    config_prefix="${raw_prefix^^}"
+
     local title_var="${config_prefix}_MENU_TITLE"
     local default_var="${config_prefix}_DEFAULT_VALUE"
     local default_val="${!default_var:-$UI_DEFAULT_VALUE}"
@@ -48,7 +51,7 @@ uiRenderGumInput() {
         # validator returns text ? --> recurse with the new error message
         # do not judge me, I just learning bash
         [[ -n "$current_error" ]] && {
-            uiRenderGumInput "$raw_prefix" "$validator" "$user_input" "$current_error"
+            uiRenderGumInput "$validator" "$user_input" "$current_error"
             return $?
         }
     }

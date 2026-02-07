@@ -6,14 +6,15 @@
 
 # uiRenderDialogMenu
 uiRenderDialogMenu() {
-    local raw_prefix="$1"
-    shift
+    local raw_prefix=""
+    local config_prefix=""
     local choice
     local options=("$@")
     local menu_height="${UI_MENU_HEIGHT:-5}"
     local cancel_label="${UI_CANCEL_LABEL:-"Exit"}"
 
-    local config_prefix="${raw_prefix^^}"
+    raw_prefix=$(getAppConfig "step")
+    config_prefix="${raw_prefix^^}"
 
     local backtitle_var="${config_prefix}_BACKTITLE"
     local width_var="${config_prefix}_DIALOG_WIDTH"

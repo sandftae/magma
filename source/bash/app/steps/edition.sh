@@ -14,7 +14,7 @@ edition() {
 
     # display menu and handle user navigation
     local choice
-    choice=$(uiMenu "edition" "${displayNames[@]}") || return $?
+    choice=$(uiMenu "${displayNames[@]}") || return $?
 
     # find technical value matching the selected display label
     local finalValue=""

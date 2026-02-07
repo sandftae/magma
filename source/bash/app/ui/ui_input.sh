@@ -7,7 +7,6 @@
 # function uiInput
 uiInput() {
     local validator_func="$2"
-    local step_prefix="$1"
     local mode
 
     # extract session mode
@@ -15,7 +14,7 @@ uiInput() {
 
     # route the args by mode
     case "$mode" in
-        "gum")    uiRenderGumInput "$step_prefix" "$validator_func" ;;
-        "dialog") uiRenderDialogInput "$step_prefix" "$validator_func" ;;
+        "gum")    uiRenderGumInput "$validator_func" ;;
+        "dialog") uiRenderDialogInput "$validator_func" ;;
     esac
 }

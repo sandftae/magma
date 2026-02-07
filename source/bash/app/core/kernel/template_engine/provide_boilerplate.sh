@@ -5,8 +5,11 @@
 
 # provide_boilerplate returns a mode-specific template
 provide_boilerplate() {
-    local config_prefix="${1^^}"
     local ui_mode
+    local config_prefix=""
+
+    config_prefix="$(getAppConfig "step")"
+    config_prefix="${config_prefix^^}"
 
     # extract session mode
     ui_mode=$(getAppConfig "uiMode")

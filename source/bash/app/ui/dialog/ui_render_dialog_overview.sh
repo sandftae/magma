@@ -6,9 +6,12 @@
 
 # uiRenderDialogOverview displays a msg box with navigation buttons
 uiRenderDialogOverview() {
-    local raw_prefix="$1"
-    local message="$2"
-    local config_prefix="${raw_prefix^^}"
+    local message="$1"
+    local raw_prefix=""
+    local config_prefix=""
+
+    raw_prefix=$(getAppConfig "step")
+    config_prefix="${raw_prefix^^}"
 
     local back_label_var="${config_prefix}_BACK_LABEL"
     local height_var="${config_prefix}_DIALOG_HEIGHT"

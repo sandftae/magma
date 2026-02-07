@@ -7,9 +7,8 @@
 # domain handles the user input for the local development domain
 domain() {
     local result
-    local step_prefix="domain"
 
-    result=$(uiInput "$step_prefix" "__validateDomain")
+    result=$(uiInput  "__validateDomain")
     local exitCode=$?
 
     # handle Escape/Cancel

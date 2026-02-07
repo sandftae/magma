@@ -8,9 +8,13 @@ uiRenderDialogInput() {
     local exit_code
     local user_input
     local error_message
-    local validator="$2"
-    local raw_prefix="$1"
-    local config_prefix="${raw_prefix^^}"
+    local validator="$1"
+    local raw_prefix=""
+    local config_prefix=""
+
+    raw_prefix=$(getAppConfig "step")
+    config_prefix="${raw_prefix^^}"
+
     local back_title_var="${config_prefix}_BACKTITLE"
     local menu_title_var="${config_prefix}_MENU_TITLE"
     local back_label_var="${config_prefix}_BACK_LABEL"
@@ -22,6 +26,9 @@ uiRenderDialogInput() {
     local value="${!default_value_var:-$UI_DEFAULT_VALUE}"
     local menu_title="${!menu_title_var:-$UI_CONFIGURATION_LABEL}"
     local menu_content="${!menu_content_var:-$UI_INPUT_MENU_BOX_CONTENT}"
+
+
+
 
     while :; do
         user_input=$(dialog --clear \
