@@ -10,9 +10,7 @@ uiRenderDialogInput() {
     local error_message
     local validator="$2"
     local raw_prefix="$1"
-
     local config_prefix="${raw_prefix^^}"
-
     local back_title_var="${config_prefix}_BACKTITLE"
     local menu_title_var="${config_prefix}_MENU_TITLE"
     local back_label_var="${config_prefix}_BACK_LABEL"
