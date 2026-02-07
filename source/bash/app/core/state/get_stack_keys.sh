@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# NAMESPACE: Stack
+# NAMESPACE: State
 # DESCRIPTION: manages the configuration data storage
 # ============================================================
 
