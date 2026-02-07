@@ -10,5 +10,4 @@ setStackData() {
     local value="$2"
 
     __STACK_DATA["$key"]="$value"
-    logDebug "state:stack:set -> $key"
 }
