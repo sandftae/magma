@@ -11,10 +11,10 @@ frontend() {
     local choice
 
     # extract options
-    parseKvOptions "$PLATFORM_FRONTEND_RAW_OPTIONS" displayNames technicalValues
+    parseKvOptions "$FRONTEND_RAW_OPTIONS" displayNames technicalValues
 
     # render the menu
-    choice=$(uiMenu "platform_frontend" "${displayNames[@]}")
+    choice=$(uiMenu "${displayNames[@]}")
     local exitCode=$?
 
     # handle navigation based on exit codes

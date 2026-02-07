@@ -6,7 +6,7 @@
 # provide_var_context extracts stack data into the local caller scope
 provide_var_context() {
     local keys
-    keys=$(getStackKeys)
+    keys=$(getStackDataKeys)
 
     for key in $keys; do
         local value

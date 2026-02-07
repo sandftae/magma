@@ -7,9 +7,8 @@
 # domain handles the user input for the local development domain
 domain() {
     local result
-    local step_prefix="domain"
 
-    result=$(uiInput "$step_prefix" "__validateDomain")
+    result=$(uiInput  "__validateDomain")
     local exitCode=$?
 
     # handle Escape/Cancel
@@ -30,8 +29,7 @@ __validateDomain() {
 
     # basic format checks
     [[ "$check" =~ [[:space:]] ]] && printf "No spaces allowed" && return 1
-    [[ "$check" == http* ]] && printf "No 'http' protocol allowed" && return 1
-    [[ "$check" == https* ]] && printf "No 'https' protocol allowed" && return 1
+    [[ "$check" == http* ]] && printf "No 'http/https' protocol allowed" && return 1
     [[ "$check" == www.* ]] && printf "No 'www.' allowed" && return 1
 
     # only alphanumeric, dots, and hyphens allowed

@@ -15,7 +15,7 @@ version() {
 
     # display menu and handle navigation (Back/Exit)
     local choice
-    choice=$(uiMenu "version" "${displayNames[@]}")
+    choice=$(uiMenu "${displayNames[@]}")
     local exitCode=$?
 
     # handle navigation codes from uiMenu

@@ -6,8 +6,6 @@
 
 # function uiMenu
 uiMenu() {
-    local config_prefix="$1"
-    shift
     local options=("$@")
     local mode
 
@@ -16,7 +14,7 @@ uiMenu() {
 
     # route the args by mode
     case "$mode" in
-        "gum") uiRenderGumMenu "$config_prefix" "${options[@]}" ; return $? ;;
-        "dialog") uiRenderDialogMenu  "$config_prefix" "${options[@]}" ; return $? ;;
+        "gum") uiRenderGumMenu "${options[@]}" ; return $? ;;
+        "dialog") uiRenderDialogMenu "${options[@]}" ; return $? ;;
     esac
 }

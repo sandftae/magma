@@ -8,7 +8,6 @@
 base_stack_overview() {
     local boilerplate=""
     local raw_boilerplate=""
-    local step_prefix="base_stack_overview"
 
     # provide/source variable context from stack
     provide_var_context
@@ -17,11 +16,11 @@ base_stack_overview() {
     platform_resolve_dependencies "$PLATFORM_VERSION" "$FRONTEND_TYPE"
 
     # build  template/boilerplate
-    raw_boilerplate=$(provide_boilerplate "$step_prefix")
+    raw_boilerplate=$(provide_boilerplate)
     boilerplate=$(build_template "$raw_boilerplate")
 
     # route to the UI with the prepared message
-    uiOverview "$step_prefix" "$boilerplate"
+    uiOverview "$boilerplate"
     local exitCode=$?
 
     # handle navigation based on exit codes

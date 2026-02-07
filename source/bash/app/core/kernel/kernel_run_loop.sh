@@ -16,14 +16,17 @@ kernelRunLoop() {
     while [[ "$currentIndex" -lt "$totalSteps" ]] && [[ "$currentIndex" -ge 0 ]]; do
         # get current step metadata
         local stepId="${__APP_STEP_IDS[$currentIndex]}"
-        local stepFunction="${__APP_STEPS[$currentIndex]}"
+        local step="${__APP_STEPS[$currentIndex]}"
         local configFile="$projectRoot/app/steps/config/envs/steps/.${stepId}.env"
+
+        # set current step context
+        setAppConfig "step" "$step"
 
         # lazy load configuration
         utilsLoadEnvFiles "$configFile"
 
         # dynamic function call
-        "$stepFunction"
+        "$step"
         local exitCode=$?
 
         # handle navigation
@@ -31,7 +34,7 @@ kernelRunLoop() {
             0)   ((currentIndex++)) ;;
             1)   ((currentIndex--)) ;;
             255) processTerminated;  return 0 ;;
-            *)   logError "kernel: error in $stepFunction"; return 1 ;;
+            *)   logError "kernel: error in $step"; return 1 ;;
         esac
     done
 

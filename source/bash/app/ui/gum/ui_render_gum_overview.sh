@@ -9,10 +9,11 @@ uiRenderGumOverview() {
     local title
     local choice
     local title_var
-    local ok_label=""
-    local message="$2"
-    local back_label=""
-    local raw_prefix="$1"
+    local message="$1"
+    local raw_prefix=""
+
+    raw_prefix=$(getAppConfig "step")
+
     local config_prefix="${raw_prefix^^}"
     local title_var="${config_prefix}_MENU_TITLE"
     local ok_label_var="${config_prefix}_OK_LABEL"
