@@ -12,7 +12,7 @@ provide_var_context() {
         local value
         value=$(getStackData "$key")
 
-        if [[ "${value,,}" == "cc" || "${value,,}" == "ce" ]]; then
+        if [[ "${value,,}" == "ee" || "${value,,}" == "ce" ]]; then
             value="${value^^}"
         fi
 

@@ -10,7 +10,7 @@ platform_resolve_dependencies() {
     local commerce_version="$1" # e.g., 2.4.8
     local frontend_type="$2"    # e.g., monolith
 
-    # x.x.8 -> x_x_x
+    # x.x.x -> x_x_x
     local version_suffix="${commerce_version//./_}"
     local frontend_key="${frontend_type^^}" # MONOLITH
 
