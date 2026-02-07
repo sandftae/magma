@@ -21,8 +21,6 @@ uiRenderGumMenu() {
     local menu_title="${!menu_title_var:-$UI_CONFIGURATION_LABEL}"
     title=$(formatToTitleCase "$menu_title")
 
-    uiRenderExitHint
-
     # loop until a valid selection is made (skips the separator)
     while true; do
         choice=$(
