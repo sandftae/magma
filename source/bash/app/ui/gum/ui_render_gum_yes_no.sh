@@ -15,13 +15,13 @@ uiRenderGumYesNo() {
     config_prefix="${raw_prefix^^}"
 
     local title_var="${config_prefix}_MENU_TITLE"
-    local no_button_label_var="${config_prefix}_NO_LABEL"         # <- 'No, Im Good'
+    local proceed_button_label_var="${config_prefix}_NO_LABEL"    # <- 'No, Im Good'
     local yes_button_label_var="${config_prefix}_YES_LABEL"       # <- '< Back'
     local extra_button_label_var="${config_prefix}_EXTRA_LABEL"   # <- 'Add Services'
 
-    local yes_button_label="${!yes_button_label_var:-$UI_OK_LABEL}"         # <- '< Back'
-    local no_button_label="${!no_button_label_var:-$UI_BACK_LABEL}"         # <- 'No, Im Good'
-    local extra_button_label="${!extra_button_label_var:-$UI_EXTRA_LABEL}"  # <- 'Add Services'
+    local yes_button_label="${!yes_button_label_var:-$UI_OK_LABEL}"             # <- '< Back'
+    local proceed_button_label="${!proceed_button_label_var:-$UI_BACK_LABEL}"   # <- 'No, Im Good'
+    local extra_button_label="${!extra_button_label_var:-$UI_EXTRA_LABEL}"      # <- 'Add Services'
 
     title=$(formatToTitleCase "${!title_var:-SUMMARY}")
     __renderHeader "$title"
@@ -29,7 +29,7 @@ uiRenderGumYesNo() {
     printf "%s" "$message" | gum format --type="template"
 
     choice=$(
-        printf "\n%s\n%s\n%s" "$extra_button_label" "$no_button_label" "$yes_button_label" |
+        printf "\n%s\n%s\n%s" "$extra_button_label" "$proceed_button_label" "< $yes_button_label" |
         gum choose \
           --header "" \
           --header.margin "0 1 1 3" \
@@ -41,9 +41,9 @@ uiRenderGumYesNo() {
           --selected.foreground="$COLOR_ACCENT"
     )
 
-    [[ -z "$choice" ]] && return 255                      # <- handle ESC / CTRL + C
-    [[ "$choice" == "$yes_button_label" ]] && return 1    # <- handle '< Back'
-    [[ "$choice" == $no_button_label"" ]] && return 10    # <- handle 'No, Im Good'
+    [[ -z "$choice" ]] && return 255                            # <- handle ESC / CTRL + C
+    [[ "$choice" == "$extra_button_label" ]] && return 0        # <- handle 'Add Services'
+    [[ "$choice" == $proceed_button_label"" ]] && return 10     # <- handle 'No, Im Good'
 
-    return 0                                              # <- handle 'Add Services'
+    return 1                                                    # <- otherwise, handle '< Back'
 }
