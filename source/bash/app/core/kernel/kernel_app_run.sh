@@ -29,6 +29,7 @@ appRun() {
         lastIndex=$(getAppConfig "current_step_index")
         # if it finished all steps (index >= totalSteps) => exit the app
         if [[ "$lastIndex" -ge "$totalSteps" ]]; then
+            ## TODO: added compose builder here
             break
         fi
     done

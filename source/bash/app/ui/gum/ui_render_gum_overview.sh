@@ -40,7 +40,7 @@ uiRenderGumOverview() {
         --cursor.padding="0 3 0 0" \
         --cursor="   >" \
         --selected.foreground="$COLOR_ACCENT" \
-        "$ok_label" "$back_label")
+        "$ok_label" "< $back_label")
 
     local exitCode=$?
 

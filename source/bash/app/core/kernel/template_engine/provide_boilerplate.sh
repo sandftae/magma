@@ -19,8 +19,8 @@ provide_boilerplate() {
     [[ "$ui_mode" == "gum" ]] && suffix="_GUM"
 
     # construct template variable name
-    local template_var="${config_prefix}_TOTAL_MESSAGE${suffix}"
+    local boilerplate="${config_prefix}_TOTAL_MESSAGE${suffix}"
 
     # return the content
-    printf '%s' "${!template_var}"
+    printf '%s' "${!boilerplate}"
 }
