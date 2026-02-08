@@ -1,11 +1,11 @@
 #!/bin/bash
 # ============================================================
 # NAMESPACE: UI
-# DESCRIPTION: router for overview steps
+# DESCRIPTION: router for action steps
 # ============================================================
 
-# uiOverview routes to the appropriate renderer based on uiMode
-uiOverview() {
+# uiYesNo routes to the appropriate renderer
+uiYesNo() {
     local boilerplate="$1"
     local mode
 
@@ -14,7 +14,7 @@ uiOverview() {
 
     # route the args by mode
     case "$mode" in
-        "gum")    uiRenderGumOverview "$boilerplate" ; return $? ;;
-        "dialog") uiRenderDialogOverview "$boilerplate" ; return $? ;;
+        "gum")    uiRenderGumYesNo "$boilerplate" ; return $? ;;
+        "dialog") uiRenderDialogYesNo "$boilerplate" ; return $? ;;
     esac
 }
