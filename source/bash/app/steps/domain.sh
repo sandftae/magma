@@ -8,18 +8,10 @@
 domain() {
     local result
 
-    result=$(uiInput  "__validateDomain")
-    local exitCode=$?
-
-    # handle Escape/Cancel
-    [[ $exitCode -eq 255 ]] && return 255
-    # Handle Back (for Dialog mode)
-    [[ $exitCode -eq 1 ]] && return 1
+    result=$(uiInput  "__validateDomain") || return $?
 
     # save to stack
     setStackData "domain" "${result:-$DOMAIN_DEFAULT}"
-
-    return 0
 }
 
 # __validateDomain performs domain validation
