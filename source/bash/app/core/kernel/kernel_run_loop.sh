@@ -31,11 +31,11 @@ kernelRunLoop() {
 
         # handle navigation
         case "$exitCode" in
-            0)   ((currentIndex++)) ;;
-            1)   ((currentIndex--)) ;;
-            10)   currentIndex=$totalSteps ;;
-            255)  processTerminated; return 0 ;;
-            *)    logError "kernel: error in $step"; return 1 ;;
+            0)          ((currentIndex++)) ;;
+            1)          ((currentIndex--)) ;;
+            10)         currentIndex=$totalSteps ;;
+            255 | 130)  processTerminated; return 0 ;;
+            *)          logError "kernel: error in $step"; return 1 ;;
         esac
     done
 

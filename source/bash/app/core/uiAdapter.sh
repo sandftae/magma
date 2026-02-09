@@ -45,10 +45,8 @@ uiSelectMode() {
 
     local exitCode=$?
 
-    [[ $exitCode -eq 130 || -z "$choice" ]] && {
-        processTerminated
-        return 1
-    }
+    [[ $exitCode -eq 130  ]] && { processTerminated; return 1; }
+    [[ $exitCode -eq 1  ]] && return 1
 
     # routing
     case "$choice" in

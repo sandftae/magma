@@ -8,27 +8,22 @@
 edition() {
     local displayNames=()
     local technicalValues=()
+    local choice
 
-    # extract labels and technical keys from raw env string
+    # extract data
     parseKvOptions "$EDITION_RAW_OPTIONS" displayNames technicalValues
 
-    # display menu and handle user navigation
-    local choice
     choice=$(uiMenu "${displayNames[@]}") || return $?
 
-    # find technical value matching the selected display label
-    local finalValue=""
-    local i
+    # associative array is used for instant lookup
+    declare -A lookup
     for i in "${!displayNames[@]}"; do
-        if [[ "${displayNames[$i]}" == "$choice" ]]; then
-            finalValue="${technicalValues[$i]}"
-            break
-        fi
+        lookup["${displayNames[i]}"]="${technicalValues[i]}"
     done
 
-    # ensure fallback value exists and save to stack state
-    finalValue="${finalValue:-$EDITION_DEFAULT}"
-    setStackData "platform_edition" "$finalValue"
+    # get value or fallback
+    local finalValue="${lookup[$choice]:-$EDITION_DEFAULT}"
 
-    return 0
+    # save
+    setStackData "platform_edition" "$finalValue"
 }
