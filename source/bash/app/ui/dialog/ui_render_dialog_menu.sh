@@ -31,14 +31,14 @@ uiRenderDialogMenu() {
     for opt in "$@"; do dialogOptions+=("$opt" ""); done
 
     # it it is the first step, change label to Exit
-    [[ "$(getAppConfig "current_step_index")" == "0" ]] && cancel="$EDITION_CANCEL_LABEL"
+    [[ "$(getAppConfig "current_step_index")" == "0" ]] && cancel_label="$EDITION_CANCEL_LABEL"
 
     # execute dialog
     choice=$(
         dialog --clear --colors --no-collapse \
             --backtitle "$backtitle" \
             --title "$menu_title" \
-            --cancel-label "$cancel" \
+            --cancel-label "$cancel_label" \
             --menu "$tooltip" "$height" "$width" "$menu_height" \
             "${dialogOptions[@]}" 3>&1 1>&2 2>&3
     ) || return $?
