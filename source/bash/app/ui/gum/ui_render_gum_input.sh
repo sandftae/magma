@@ -7,15 +7,10 @@
 
 # uiRenderGumInput handles the UI lifecycle for a single text input field
 uiRenderGumInput() {
-    local title
     local value="$2"
-    local user_input
-    local exit_status
-    local current_error
     local validator="$1"
     local error_msg="$3"
-    local raw_prefix=""
-    local config_prefix=""
+    local title user_input current_error raw_prefix="" config_prefix=""
 
     raw_prefix=$(getAppConfig "step")
     config_prefix="${raw_prefix^^}"
@@ -39,11 +34,7 @@ uiRenderGumInput() {
     } >&2
 
     # get input
-    user_input=$(gum input --prompt "   > " --value "$current_val" --width 60)
-    exit_status=$?
-
-    # handle ESC / Ctrl+C
-    [[ $exit_status -eq 130 ]] && return 255
+    user_input=$(gum input --prompt "   > " --value "$current_val" --width 60) || return $?
 
     # validation
     [[ -n "$validator" ]] && {
@@ -58,7 +49,6 @@ uiRenderGumInput() {
 
     # success
     printf '%s' "$user_input"
-    return 0
 }
 
 # __renderHeader draws the application hero section and current step title
