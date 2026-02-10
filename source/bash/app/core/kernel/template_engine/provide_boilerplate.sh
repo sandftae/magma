@@ -3,8 +3,8 @@
 # DESCRIPTION: provides a template/boilerplate
 # ============================================================
 
-# provide_boilerplate returns a mode-specific template
-provide_boilerplate() {
+# provideBoilerplate returns a mode-specific template
+provideBoilerplate() {
     local ui_mode
     local config_prefix=""
 
