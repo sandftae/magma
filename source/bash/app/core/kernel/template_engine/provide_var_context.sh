@@ -3,8 +3,8 @@
 # DESCRIPTION: manages the variable context for UI templates
 # ============================================================
 
-# provide_var_context extracts stack data into the local caller scope
-provide_var_context() {
+# provideVarContext extracts stack data into the local caller scope
+provideVarContext() {
     local keys
     keys=$(getStackDataKeys)
 
