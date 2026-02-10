@@ -5,7 +5,7 @@
 # ============================================================
 
 # build boilerplate/template
-buildBoilerPlate() {
+buildBoilerplate() {
     local raw_boilerplate boilerplate
 
     # provide/source variable context from stack

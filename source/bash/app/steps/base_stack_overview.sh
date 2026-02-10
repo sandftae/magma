@@ -12,7 +12,7 @@ base_stack_overview() {
     platform_resolve_dependencies "$PLATFORM_VERSION" "$FRONTEND_TYPE"
 
     # build  template/boilerplate
-    boilerplate=$(buildBoilerPlate)
+    boilerplate=$(buildBoilerplate)
 
     # route to the UI with the prepared message
     uiOverview "$boilerplate" || return $?
