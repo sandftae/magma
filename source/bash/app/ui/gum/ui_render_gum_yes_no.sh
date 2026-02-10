@@ -24,7 +24,7 @@ uiRenderGumYesNo() {
     local extra_button_label="${!extra_button_label_var:-$UI_EXTRA_LABEL}"      # <- 'Add Services'
 
     title=$(formatToTitleCase "${!title_var:-SUMMARY}")
-    __renderHeader "$title"
+    gum style --foreground "$COLOR_ACCENT" --bold "   $title"
 
     printf "%s" "$message" | gum format --type="template"
 

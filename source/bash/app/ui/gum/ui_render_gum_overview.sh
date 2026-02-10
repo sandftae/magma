@@ -24,8 +24,7 @@ uiRenderGumOverview() {
     local back_label="${!back_label_var:-$UI_BACK_LABEL}"
 
     title=$(formatToTitleCase "${!title_var:-SUMMARY}")
-
-    __renderHeader "$title"
+   gum style --foreground "$COLOR_ACCENT" --bold "   $title"
 
     # render template in a 'gum' way
     printf "\n%s" "$message" | gum format --type="template"

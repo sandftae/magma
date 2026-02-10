@@ -25,6 +25,9 @@ kernelRunLoop() {
         # lazy load configuration
         utilsLoadEnvFiles "$configFile"
 
+        # re-set headers if it is not dialog
+        [[ "$(getAppConfig "uiMode")" != "dialog" ]] && uiStepHeaders
+
         # dynamic function call
         "$step"
         local exitCode=$?
