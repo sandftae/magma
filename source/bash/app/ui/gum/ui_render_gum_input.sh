@@ -10,7 +10,7 @@ uiRenderGumInput() {
     local value="$2"
     local validator="$1"
     local error_msg="$3"
-    local title user_input current_error raw_prefix="" config_prefix=""
+    local title user_input raw_prefix="" config_prefix=""
 
     raw_prefix=$(getAppConfig "step")
     config_prefix="${raw_prefix^^}"
@@ -20,55 +20,38 @@ uiRenderGumInput() {
     local default_val="${!default_var:-$UI_DEFAULT_VALUE}"
     local current_val="${value:-$default_val}"
 
-    # render UI block directly to stderr to bypass command substitution capture
-    {
-        title=$(formatToTitleCase "${!title_var:-$UI_CONFIGURATION_LABEL}")
-        __renderHeader "$title"
+    title=$(formatToTitleCase "${!title_var:-$UI_CONFIGURATION_LABEL}")
 
-        # If error_msg exists, render error; otherwise, render tip
-        [[ -n "$error_msg" ]] \
-            && gum style --foreground 196 --margin "0 3 0 3" "✖ $error_msg" \
-            || gum style --foreground 240 --margin "0 3 0 3" "Tip: format as [name].localhost"
+    while true; do
+        {
+            [[ -n "$error_msg" ]] \
+                       && gum style --foreground 196 --margin "0 3 0 3" "✖ $error_msg" \
+                       || gum style --foreground 240 --margin "0 3 0 3" "Tip: format as [name].localhost"
 
-        printf "\n"
-    } >&2
+           # re-set headers one more time
+           uiStepHeaders
+           gum style --foreground "$COLOR_ACCENT" --bold "   $title"
 
-    # get input
-    user_input=$(gum input --prompt "   > " --value "$current_val" --width 60) || return $?
+             # if error_msg exists, render error; otherwise, render tip
+             [[ -n "$error_msg" ]] \
+                 && gum style --foreground 196 --margin "0 3 0 3" "✖ $error_msg" \
+                 || gum style --foreground 240 --margin "0 3 0 3" "Tip: format as [name].localhost"
 
-    # validation
-    [[ -n "$validator" ]] && {
-        current_error=$("$validator" "$user_input")
-        # validator returns text ? --> recurse with the new error message
-        # do not judge me, I just learning bash
-        [[ -n "$current_error" ]] && {
-            uiRenderGumInput "$validator" "$user_input" "$current_error"
-            return $?
-        }
-    }
+             printf "\n"
+        } >&2
+
+        # user input
+        user_input=$(gum input --prompt "   > " --value "$current_val" --width 60) || return $?
+
+        [[ -z "$validator" ]] && break
+        # validate inout
+        error_msg=$("$validator" "$user_input")
+        [[ -z "$error_msg" ]] && break
+
+        # store to show user input
+        current_val="$user_input"
+    done
 
     # success
     printf '%s' "$user_input"
-}
-
-# __renderHeader draws the application hero section and current step title
-__renderHeader() {
-    local step_title="$1"
-    local app_title="${APP_TITLE:-CLI Application}"
-
-    # lear screen and render global exit hint
-    clear
-
-    # hero section
-    gum style \
-        --foreground "$COLOR_PRIMARY" \
-        --border double \
-        --border-foreground "$COLOR_ACCENT" \
-        --align center --width 60 --margin "1 2" --padding "0 1" \
-        "$app_title"
-
-    uiRenderExitHint
-
-    # current step title
-    gum style --foreground "$COLOR_ACCENT" --bold "   $step_title"
 }
