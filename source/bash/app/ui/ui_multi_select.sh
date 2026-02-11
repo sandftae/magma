@@ -15,7 +15,7 @@ uiMultiSelect() {
 
     # route the args by mode
     case "$mode" in
-        "gum")    uiRenderGumMultiSelect "$message" "${options[@]}" ;;
-        "dialog") uiRenderDialogMultiSelect "$message" "${options[@]}" ;;
+        "gum")    uiRenderGumMultiSelect "$message" "${options[@]}" ; return $? ;;
+        "dialog") uiRenderDialogMultiSelect "$message" "${options[@]}" ; return $?  ;;
     esac
 }

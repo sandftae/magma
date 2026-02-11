@@ -8,25 +8,17 @@
 services() {
     local selected_ids
     local boilerplate=""
-    local raw_boilerplate=""
-
-    # provide/source variable context from stack
-    provide_var_context
 
     # build  template/boilerplate
-    raw_boilerplate=$(provide_boilerplate)
-    boilerplate=$(build_template "$raw_boilerplate")
+    boilerplate=$(buildBoilerplate)
 
-    # # route to the UI with the prepared args
-    selected_ids=$(uiMultiSelect "$boilerplate" "${SERVICES_LIST[@]}")
-    local exitCode=$?
+    # route to the UI with the prepared message
+   if [[ "$(getAppConfig "uiMode")" == "gum" ]]; then
+       uiMultiSelect "$boilerplate" "${SERVICES_LIST_GUM[@]}" || return $?
+   else
+       uiMultiSelect "$boilerplate" "${SERVICES_LIST[@]}" || return $?
+   fi
 
     # save
     setStackData "selected_services" "$selected_ids"
-
-    # navigation
-    [[ $exitCode -eq 255 ]] && return 255
-    [[ $exitCode -eq 1 ]] && return 1
-
-    return 0
 }
