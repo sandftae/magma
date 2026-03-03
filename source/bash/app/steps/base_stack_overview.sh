@@ -8,6 +8,9 @@
 base_stack_overview() {
     local boilerplate=""
 
+    # provide/source variable context from stack
+    provideVarContext
+
     # resolve and source dependencies dependencies
     platform_resolve_dependencies "$PLATFORM_VERSION" "$FRONTEND_TYPE"
 

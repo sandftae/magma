@@ -9,6 +9,9 @@ services() {
     local selected_ids
     local boilerplate=""
 
+    # provide/source variable context from stack
+    provideVarContext
+
     # build  template/boilerplate
     boilerplate=$(buildBoilerplate)
 
