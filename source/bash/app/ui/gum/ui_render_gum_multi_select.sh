@@ -33,6 +33,7 @@ uiRenderGumMultiSelect() {
     joined_selected=$(IFS=,; printf '%s' "${selected_items[*]}")
     formatted_header=$(printf '%s' "$title" | gum format --type template)
 
+    # execute
     chosen_labels=$(gum choose --no-limit \
         --header "$formatted_header" \
         --cursor=" > " \
