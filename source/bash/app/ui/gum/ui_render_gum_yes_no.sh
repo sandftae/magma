@@ -38,4 +38,6 @@ uiRenderGumYesNo() {
     ) || return $? # <- handle ESC and CTRL + C
 
     [[ "$choice" == $proceed_button_label"" ]] && return 10 # <- handle 'No, Im Good'
+
+    return 0 # < - handle 'Add Services'
 }
