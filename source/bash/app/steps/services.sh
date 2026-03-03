@@ -16,11 +16,11 @@ services() {
     boilerplate=$(buildBoilerplate)
 
     # route to the UI with the prepared message
-   if [[ "$(getAppConfig "uiMode")" == "gum" ]]; then
-       uiMultiSelect "$boilerplate" "${SERVICES_LIST_GUM[@]}" || return $?
-   else
-       uiMultiSelect "$boilerplate" "${SERVICES_LIST[@]}" || return $?
-   fi
+    if [[ "$(getAppConfig "uiMode")" == "gum" ]]; then
+        selected_ids=$(uiMultiSelect "$boilerplate" "${SERVICES_LIST_GUM[@]}") || return $?
+    else
+        selected_ids=$(uiMultiSelect "$boilerplate" "${SERVICES_LIST[@]}") || return $?
+    fi
 
     # save
     setStackData "selected_services" "$selected_ids"
