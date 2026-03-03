@@ -8,9 +8,6 @@
 buildBoilerplate() {
     local raw_boilerplate boilerplate
 
-    # provide/source variable context from stack
-    provideVarContext
-
     # build template/boilerplate
     raw_boilerplate=$(provideBoilerplate)
 
