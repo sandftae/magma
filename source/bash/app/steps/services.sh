@@ -16,7 +16,7 @@ services() {
 
     ui_mode=$(getAppConfig "uiMode")
 
-    # either GUM otr DIALOG
+    # either GUM or DIALOG
     list_var_name="SERVICES_LIST_${ui_mode^^}"
 
     declare -n target_list="$list_var_name"

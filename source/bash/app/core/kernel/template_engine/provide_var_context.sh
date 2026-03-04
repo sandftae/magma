@@ -34,6 +34,13 @@ _resolveServiceLabels() {
     local input_ids="$1"
     local service_id i count=0 result=""
     local -A id_to_label
+    local mode br=$'\n                           '
+
+    mode=$(getAppConfig "uiMode")
+    # it is slightly different for gum
+    if [[ "$mode" == "gum" ]]; then
+            br="\\n                           "
+        fi
 
     for ((i=0; i<${#SERVICES_LIST[@]}; i+=2)); do
         id_to_label["${SERVICES_LIST[i]}"]="${SERVICES_LIST[i+1]}"
@@ -41,14 +48,11 @@ _resolveServiceLabels() {
 
     for service_id in $input_ids; do
         [[ -z "${id_to_label[$service_id]}" ]] && continue
-
         ((count++))
 
         local sep=""
         [[ $count -gt 1 ]] && {
-            (( (count - 1) % 5 == 0 )) \
-                && sep="\\n                           " \
-                || sep=", "
+            (( (count - 1) % 5 == 0 )) && sep="$br" || sep=", "
         }
 
         result+="${sep}${id_to_label[$service_id]}"
