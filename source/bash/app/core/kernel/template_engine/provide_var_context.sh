@@ -1,3 +1,4 @@
+#!/bin/bash
 # ============================================================
 # NAMESPACE: Template Engine
 # DESCRIPTION: manages the variable context for UI templates
@@ -24,6 +25,7 @@ provideVarContext() {
     if [[ "$should_resolve_services" == true ]]; then
         # add to context services by code
         SERVICES=$(_resolveServiceLabels "$SELECTED_SERVICES")
+        : "$SERVICES"
     fi
 }
 
