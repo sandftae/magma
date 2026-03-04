@@ -5,7 +5,9 @@
 
 # provideVarContext extracts stack data into the local caller scope
 provideVarContext() {
-    local keys
+    local should_resolve_services="${1:-false}"
+    local keys key value
+
     keys=$(getStackDataKeys)
 
     for key in $keys; do
@@ -18,4 +20,37 @@ provideVarContext() {
 
         printf -v "${key^^}" '%s' "$value"
     done
+
+    if [[ "$should_resolve_services" == true ]]; then
+        # add to context services by code
+        SERVICES=$(_resolveServiceLabels "$SELECTED_SERVICES")
+    fi
+}
+
+# resolveServiceLabels converts space-separated IDs into a formatted label string
+_resolveServiceLabels() {
+    local input_ids="$1"
+    local service_id i count=0 result=""
+    local -A id_to_label
+
+    for ((i=0; i<${#SERVICES_LIST[@]}; i+=2)); do
+        id_to_label["${SERVICES_LIST[i]}"]="${SERVICES_LIST[i+1]}"
+    done
+
+    for service_id in $input_ids; do
+        [[ -z "${id_to_label[$service_id]}" ]] && continue
+
+        ((count++))
+
+        local sep=""
+        [[ $count -gt 1 ]] && {
+            (( (count - 1) % 5 == 0 )) \
+                && sep="\\n                           " \
+                || sep=", "
+        }
+
+        result+="${sep}${id_to_label[$service_id]}"
+    done
+
+    printf '%s' "$result"
 }
