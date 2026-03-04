@@ -6,8 +6,7 @@
 
 # services orchestrates the checklist selection step
 services() {
-    local selected_ids
-    local boilerplate=""
+    local ui_mode selected_ids list_var_name boilerplate=""
 
     # provide/source variable context from stack
     provideVarContext
@@ -15,12 +14,14 @@ services() {
     # build  template/boilerplate
     boilerplate=$(buildBoilerplate)
 
-    # route to the UI with the prepared message
-    if [[ "$(getAppConfig "uiMode")" == "gum" ]]; then
-        selected_ids=$(uiMultiSelect "$boilerplate" "${SERVICES_LIST_GUM[@]}") || return $?
-    else
-        selected_ids=$(uiMultiSelect "$boilerplate" "${SERVICES_LIST[@]}") || return $?
-    fi
+    ui_mode=$(getAppConfig "uiMode")
+
+    # either GUM otr DIALOG
+    list_var_name="SERVICES_LIST_${ui_mode^^}"
+
+    declare -n target_list="$list_var_name"
+
+    selected_ids=$(uiMultiSelect "$boilerplate" "${target_list[@]}") || return $?
 
     # save
     setStackData "selected_services" "$selected_ids"
